@@ -6,4 +6,27 @@ Terraform module for creating Openstack clusters.
 - Enable block_device
 - Enable provisioner "local-exec"
 
+## Usage
 
+```
+module "cluster" {
+  source = "/path/to/this/module"
+  number_of_instances = 5
+  name = "test-instance"
+  flavor_name = "some-supported-flavor"
+  image_name =  "some-supported-flavor"
+  os_ssh_keypair = "name-of-ssh-keypair-in-os"
+  network_name = "name-of-network-in-os"
+  security_groups = ["default"]
+  assign_floating_ip = false
+}
+```
+
+See [master-slaves](https://github.com/Wrede/terraform-os-instance/tree/main/examples/master-slaves) example for using master-slaves [sub-module](https://github.com/Wrede/terraform-os-instance/tree/main/modules/master-slaves)
+
+Use terraform life-cycle:
+```
+> terraform init
+> terraform plan
+> terraform apply
+```
