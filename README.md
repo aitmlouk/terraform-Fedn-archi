@@ -10,7 +10,7 @@ Terraform module for creating Openstack clusters.
 
 ```
 module "cluster" {
-  source = "/path/to/this/module"
+  source = "github.com/Wrede/terraform-os-instance"
   number_of_instances = 5
   name = "test-instance"
   flavor_name = "some-supported-flavor"
