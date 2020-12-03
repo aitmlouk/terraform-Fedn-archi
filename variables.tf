@@ -62,7 +62,7 @@ variable security_groups {
   default     = ["default"]
 }
 
-variable "user_data" {
+variable user_data {
   type        = string
   description = "The user data to provide when launching the instance"
   default     = null
