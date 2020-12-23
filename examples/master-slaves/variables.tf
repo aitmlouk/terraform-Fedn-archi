@@ -14,7 +14,7 @@ variable same_image {
 variable flavor_name{
   type        = string
   description = "The flavor to be used for the all (if same_flavor is set to true) instances"
-  default     = ""
+  default     = null
 }
 
 variable image_name{
