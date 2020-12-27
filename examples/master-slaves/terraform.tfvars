@@ -25,6 +25,7 @@ assign_floating_ip_to_reducer   = true
 assign_floating_ip_to_combiners = true
 assign_floating_ip_to_clients   = true
 ###### Keypair will be used
-os_ssh_keypair                  = "~/.ssh//deploy.key"
-# os_ssh_keypair                  = "Sadi"
+public_ssh_keypair              = "~/.ssh/sadi.pub"
+private_ssh_keypair             = "~/.ssh/sadi"
+key_name                        = "Sadi_fedn"
 

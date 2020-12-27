@@ -47,11 +47,11 @@ variable image_id {
   default     = null
 }
 
-variable os_ssh_keypair {
-  type        = string
-  description = "SSH keypair that already exist in Openstack to inject in the instance"
-  default     = ""
-}
+# variable os_ssh_keypair {
+#   type        = string
+#   description = "SSH keypair that already exist in Openstack to inject in the instance"
+#   default     = ""
+# }
 
 variable network_name {
   type        = string
@@ -79,6 +79,26 @@ variable assign_floating_ip {
 variable floating_ip_pool {
   type        = string
   description = "Name of the floating IP pool (don't leave it empty if assign_floating_ip is true)"
+  default     = ""
+}
+
+#############################################################
+########      key-pairs
+
+variable key_name {
+  type        = "string"
+  description = "KeyPair name to create"
+}
+
+variable public_ssh_keypair {
+  type        = string
+  description = "SSH keypair that already exist in Openstack to inject in the instance"
+  default     = ""
+}
+
+variable private_ssh_keypair {
+  type        = string
+  description = "SSH keypair that already exist in Openstack to inject in the instance"
   default     = ""
 }
 
