@@ -4,6 +4,7 @@ module "provided_keypair" {
   key_name          = var.key_name
   generate_ssh_key  = false
   public_key_file   = var.public_ssh_keypair
+  # private_key_file  = var.private_ssh_keypair
 }
 
 module "reducer" {
