@@ -191,6 +191,13 @@ variable name_clients  {
 }
 
 
+variable image_id {
+  type        = string
+  description = "Image ID that already exists in Openstack to boot instance from"
+  default     = null
+}
+
+
 #############################################################
 ########      key-pairs
 
@@ -209,4 +216,11 @@ variable private_ssh_keypair {
   type        = string
   description = "SSH keypair that already exist in Openstack to inject in the instance"
   default     = ""
+}
+
+#########################################################################
+#################### Volume size
+
+variable "volume_size" {
+  default = 100
 }

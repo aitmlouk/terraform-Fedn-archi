@@ -12,6 +12,8 @@ module "cluster" {
   assign_floating_ip_to_combiners = var.assign_floating_ip_to_combiners
   assign_floating_ip_to_clients   = var.assign_floating_ip_to_clients
   floating_ip_pool                = var.floating_ip_pool
+  image_id                        = var.image_id
+  volume_size                     = var.volume_size
 
   ################################## key-pairs parameters 
   public_ssh_keypair              = var.public_ssh_keypair

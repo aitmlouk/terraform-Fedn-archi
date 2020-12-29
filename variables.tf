@@ -102,4 +102,12 @@ variable private_ssh_keypair {
   default     = ""
 }
 
+#########################################################################
+#################### Volume size
+
+variable "volume_size" {
+  default = 100
+}
+
+
 
