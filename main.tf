@@ -48,13 +48,18 @@ resource "openstack_compute_instance_v2" "this" {
   flavor_name = var.flavor_name
   key_pair    = var.key_name
   user_data    = var.user_data
-
+  security_groups = var.security_groups
+  
   network {
     name = var.network_name
   }
-
-  security_groups = var.security_groups
+  provisioner "local-exec" {
+        when    = destroy
+        command = "echo > hosts_ips.txt" 
+      }
 }
+
+
 
 
 # Allocate floating IPs (if required)
@@ -72,12 +77,13 @@ resource "openstack_compute_floatingip_associate_v2" "this" {
 
 
 resource "null_resource" "provision" {
+  count       = var.number_of_instances
   depends_on = ["openstack_compute_floatingip_associate_v2.this"]
   connection {
       type        = "ssh"
       user        = "ubuntu"
       private_key = "${file("${var.private_ssh_keypair}")}" #file(var.os_ssh_keypair)
-      host        = element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, 0)
+      host        =  element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)
     }
 
   provisioner "file" {
@@ -92,29 +98,10 @@ resource "null_resource" "provision" {
       "sudo ./setup.sh",
     ]
     }
-
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sudo apt-get update",
-  #     "sudo apt-get install docker -y",
-  #     "sudo apt-get install docker-compose -y",
-  #     "sudo apt-get install git-lfs -y",
-  #     "sudo apt-get update -y",
-  #     "sudo apt install unzip",
-  #     "sudo systemctl enable docker",
-  #     "sudo systemctl start docker",
-  #     "sudo usermod -G docker ubuntu",
-  #     "git clone https://github.com/scaleoutsystems/fedn.git",
-  #     "cd fedn",
-  #     "git checkout develop",
-  #   ]
-  # }
-  # provisioner "local-exec" {
-  #  command = "ssh-keygen -b 2048 -t rsa -f deploy.key -q -N ''"
-  # }
   provisioner "local-exec" {
-    # command = "echo COMMON=${openstack_compute_floatingip_associate_v2.this.*.floating_ip} > common_ip.txt" #TODO push file to other hosts for connecting
-    command = "echo ${element(openstack_compute_instance_v2.this.*.name,0)}= ${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, 0)} > common_ip1.txt" 
-  }
+      command = "echo ${element(openstack_compute_instance_v2.this.*.name,count.index)}= ${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)} >> hosts_ips.txt" 
+    }
 
+  
+ 
 }

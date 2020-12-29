@@ -27,3 +27,9 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# certificate
+./examples/master-slaves/setupFiles/sad
+./examples/master-slaves/setupFiles/sad.pub
+*terraform.log
+./examples/master-slaves/terraform.log
