@@ -29,6 +29,8 @@ override.tf.json
 # example: *tfplan*
 
 # certificate
+*sadi
+*sadi*
 ./examples/master-slaves/setupFiles/sadi
 ./examples/master-slaves/setupFiles/sadi.pub
 *terraform.log
