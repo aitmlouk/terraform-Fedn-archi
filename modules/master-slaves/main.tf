@@ -7,6 +7,13 @@ module "provided_keypair" {
   # private_key_file  = var.private_ssh_keypair
 }
 
+module "security_groups" {
+  source            = "../security-group/"
+  securityG_name   = var.security_groups
+}
+
+
+
 module "reducer" {
   source               = "../../"
   number_of_instances  = 1

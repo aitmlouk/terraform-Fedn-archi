@@ -59,9 +59,9 @@ variable network_name {
 }
 
 variable security_groups {
-  type        = list(string)
+  type        = string
   description = "Names of the security groups for instance"
-  default     = ["default"]
+  default     = ""
 }
 
 variable user_data {

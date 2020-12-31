@@ -5,7 +5,7 @@ module "cluster" {
   number_of_combiners             = var.number_of_combiners
   number_of_clients               = var.number_of_clients
   network_name                    = var.network_name
-  security_groups                 = var.security_groups
+  security_groups                 = var.security_groups   #var.security_groups
   flavor_name                     = var.flavor_name
   image_name                      = var.image_name
   assign_floating_ip_to_reducer   = var.assign_floating_ip_to_reducer

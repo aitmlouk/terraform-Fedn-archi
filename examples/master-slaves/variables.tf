@@ -37,9 +37,9 @@ variable network_name {
 }
 
 variable security_groups {
-  type        = list(string)
+  type        = string
   description = "Names of the security groups for instance"
-  default     = [""]
+  default     = ""
 }
 
 variable floating_ip_pool {
@@ -224,3 +224,13 @@ variable private_ssh_keypair {
 variable "volume_size" {
   default = 100
 }
+
+# ##########################################################################
+# #############security groups
+
+# variable securityG_name{
+#   type        = list(string)
+#   description = "The flavor to be used for the all (if same_flavor is set to true) instances"
+#   default     = ["fedn_terrafform"]
+# }
+

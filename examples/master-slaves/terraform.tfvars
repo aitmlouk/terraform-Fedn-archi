@@ -2,7 +2,9 @@
 
 
 # This is needed to access the instance over ssh
-security_groups                 = ["default","fedn_group"]
+# security_groups                 = ["default","fedn_group"]
+security_groups                 = "fedn_groupSADI"
+# securityG_name                  = ["SadiSCG"]
 network_name                    ="SNIC 2020/20-13 Internal IPv4 Network"
 image_name                      ="Ubuntu 18.04"
 image_id                        ="0b7f5fb5-a25c-48b6-8578-06dbfa160723"
