@@ -30,3 +30,9 @@ module "cluster" {
   name_clients                    = var.name_clients 
 
 }
+
+
+######################## Print out the output variables value 
+output "example_module_outputs" {
+  value = module.cluster
+}
