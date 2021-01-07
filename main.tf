@@ -36,11 +36,7 @@ resource "openstack_compute_instance_v2" "this" {
   }
   provisioner "local-exec" {
     when    = destroy
-    command = <<-EOT
-      echo > hosts_Floating_Ips.txt
-      echo > hosts_Private_Ips.txt
-    EOT
-    interpreter = ["/bin/bash", "-c"]
+    command = "echo > ./setupFiles/hosts_Ips.txt"
   }
 
   ### Attach volume
@@ -90,19 +86,12 @@ resource "null_resource" "provision" {
       "sudo ./setup.sh",
     ]
     }
-  # provisioner "local-exec" {
-  #     command = "echo ${element(openstack_compute_instance_v2.this.*.name,count.index)}= ${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)} >> hosts_Floating_Ips.txt" 
-  #   }
 
 
+############ Export all instances public and private IPs' 
   provisioner "local-exec" {
-        command = <<-EOT
-          echo "${element(openstack_compute_instance_v2.this.*.name,count.index)}" : "${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)}" >> hosts_Floating_Ips.txt
-          echo "${element(openstack_compute_instance_v2.this.*.name,count.index)}" : "${element(openstack_compute_instance_v2.this.*.access_ip_v4, count.index)}" >> hosts_Private_Ips.txt
-        EOT
-        interpreter = ["/bin/bash", "-c"]
-      }
+      command = "echo ${element(openstack_compute_instance_v2.this.*.name,count.index)}:${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)}:${element(openstack_compute_instance_v2.this.*.access_ip_v4, count.index)} >> ./setupFiles/hosts_Ips.txt" 
+    }
 
-  
  
 }
