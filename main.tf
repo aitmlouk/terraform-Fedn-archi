@@ -90,7 +90,7 @@ resource "null_resource" "provision" {
 
 ############ Export all instances public and private IPs' 
   provisioner "local-exec" {
-      command = "echo ${element(openstack_compute_instance_v2.this.*.name,count.index)}:${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)}:${element(openstack_compute_instance_v2.this.*.access_ip_v4, count.index)} >> ./setupFiles/hosts_Ips.txt" 
+      command = "echo ${element(openstack_compute_instance_v2.this.*.name,count.index)} ${element(openstack_compute_floatingip_associate_v2.this.*.floating_ip, count.index)} ${element(openstack_compute_instance_v2.this.*.access_ip_v4, count.index)} >> ./setupFiles/hosts_Ips.txt" 
     }
 
  

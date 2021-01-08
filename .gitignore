@@ -30,8 +30,12 @@ override.tf.json
 
 # certificate
 *sadi
-*sadi*
+*sadi.pub
 ./examples/master-slaves/setupFiles/sadi
 ./examples/master-slaves/setupFiles/sadi.pub
 *terraform.log
 ./examples/master-slaves/terraform.log
+./examples/master-slaves/setupFiles/*.txt
+./examples/master-slaves/setupFiles/configs/*
+./examples/master-slaves/*.sh
+
