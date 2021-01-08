@@ -1,0 +1,14 @@
+{
+  "registry.terraform.io/hashicorp/local": {
+    "hash": "h1:pO1ANXtOCRfecKsY9Hn4UsXoPBLv6LFiDIEiS1MZ09E=",
+    "version": "2.0.0"
+  },
+  "registry.terraform.io/hashicorp/null": {
+    "hash": "h1:V1tzrSG6t3e7zWvUwRbGbhsWU2Jd/anrJpOl9XM+R/8=",
+    "version": "3.0.0"
+  },
+  "registry.terraform.io/terraform-provider-openstack/openstack": {
+    "hash": "h1:AZiyIAHWt5GNP7jxM5k4hkdfrBIZspBxru4xLBJLsMA=",
+    "version": "1.34.1"
+  }
+}
