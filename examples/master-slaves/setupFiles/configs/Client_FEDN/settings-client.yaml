@@ -1,6 +1,0 @@
-network_id: fedn-test-networ
-controller:
-    discover_host: 192.168.2.235
-    discover_port: 8090
-    token: token 
- 
