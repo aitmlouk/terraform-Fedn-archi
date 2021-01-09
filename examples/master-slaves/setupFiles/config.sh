@@ -55,7 +55,8 @@ while read -r name_R publicIp_R privateIp_R; do
 
         ## Move the reducer configuration files to the reducer instance
         echo "Move both settings-reducer.yaml and  extra-hosts-reducer.yaml files to the reducer instance"
-        scp -i $key ./configs/$name_R/extra-hosts-reducer.yaml ./configs/$name_R/settings-reducer.yaml ubuntu@${publicIp_R}\:/home/ubuntu/fedn/config
+        # -o "StrictHostKeyChecking=no"
+        scp  -i $key ./configs/$name_R/extra-hosts-reducer.yaml ./configs/$name_R/settings-reducer.yaml ubuntu@${publicIp_R}\:/home/ubuntu/fedn/config
 
 
         
@@ -70,7 +71,7 @@ while read -r name_R publicIp_R privateIp_R; do
                     mkdir ./configs/$name_C/
                     echo "Generate settings-combiner.yaml file ($name_C)"
                     {
-                        printf "network_id: fedn-test-networ\n"; shift
+                        printf "network_id: fedn-test-network\n"; shift
                         printf "controller:\n"; shift
                         printf "    discover_host: $privateIp_R\n"; shift
                         printf "    discover_port: 8090\n"; shift
@@ -83,6 +84,7 @@ while read -r name_R publicIp_R privateIp_R; do
                     } >./configs/$name_C/settings-combiner.yaml
 
                     echo "Move settings-combiner.yaml file to the combiner instance"
+                    # -o "StrictHostKeyChecking=no" 
                     scp -i $key ./configs/$name_C/settings-combiner.yaml  ubuntu@${publicIp_C}\:/home/ubuntu/fedn/config
                 fi
             done <hosts_Ips.txt
@@ -98,7 +100,7 @@ while read -r name_R publicIp_R privateIp_R; do
                     mkdir ./configs/$name_Client/
                     echo "Generate settings-client.yaml file ($name_Client)"
                     {
-                        printf "network_id: fedn-test-networ\n"; shift
+                        printf "network_id: fedn-test-network\n"; shift
                         printf "controller:\n"; shift
                         printf "    discover_host: $privateIp_R\n"; shift
                         printf "    discover_port: 8090\n"; shift
@@ -126,7 +128,8 @@ while read -r name_R publicIp_R privateIp_R; do
 
 
                     echo "Move settings-client.yaml file to the client instance"
-                    scp -i $key ./configs/$name_Client/settings-client.yaml ./configs/$name_Client/extra-hosts-client.yaml ubuntu@${publicIp_Client}\:/home/ubuntu/fedn/config
+                    # -o "StrictHostKeyChecking=no"
+                    scp  -i $key ./configs/$name_Client/settings-client.yaml ./configs/$name_Client/extra-hosts-client.yaml ubuntu@${publicIp_Client}\:/home/ubuntu/fedn/config
                 fi
             done <hosts_Ips.txt
 

@@ -10,8 +10,8 @@ image_name                      ="Ubuntu 18.04"
 image_id                        ="0b7f5fb5-a25c-48b6-8578-06dbfa160723"
 floating_ip_pool                ="Public External IPv4 Network"
 
-number_of_combiners             = 3
-number_of_clients               = 3
+number_of_combiners             = 1
+number_of_clients               = 1
 
 flavor_name                     = "ssc.xlarge.highmem"
 same_flavor                     = false
