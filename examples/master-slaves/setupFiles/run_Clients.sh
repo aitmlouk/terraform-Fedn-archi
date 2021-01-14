@@ -15,12 +15,14 @@ function new_tab() {
 
 key="sadi"
 
-while read -r name_C publicIp_C privateIp_C; do
+while read -r name_Client publicIp_Client privateIp_Client; do
 
-  if  echo "$name_C" | grep -q "Combiner"; then
-    echo "Run Combiners"
-    new_tab "$name_C" "ssh -o StrictHostKeyChecking=no  -i $key ubuntu@${publicIp_C} 'bash -s' < ./execution_sh/combiners.sh"
-    sleep 10
+  if  echo "$name_Client" | grep -q "Client"; then
+    sleep 5
+    echo "Run Clients"
+    scp -i $key casa.zip ubuntu@${publicIp_Client}\:/home/ubuntu/fedn/test
+    new_tab "$name_Client" "ssh -o StrictHostKeyChecking=no  -i $key ubuntu@${publicIp_Client} 'bash -s' < ./execution_sh/clients.sh"
+    
       
   fi
 

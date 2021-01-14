@@ -2,6 +2,8 @@
 
 maxclients=50
 key="sadi"
+rm -r ./configs/
+mkdir ./configs/
 while read -r name_R publicIp_R privateIp_R; do
     ##### reducer details
     
@@ -55,8 +57,9 @@ while read -r name_R publicIp_R privateIp_R; do
 
         ## Move the reducer configuration files to the reducer instance
         echo "Move both settings-reducer.yaml and  extra-hosts-reducer.yaml files to the reducer instance"
-        # -o "StrictHostKeyChecking=no"
-        scp -o StrictHostKeyChecking=no  -i $key ./configs/$name_R/extra-hosts-reducer.yaml ./configs/$name_R/settings-reducer.yaml ubuntu@${publicIp_R}\:/home/ubuntu/fedn/config
+        # -o "StrictHostKeyChecking=no" -o StrictHostKeyChecking=no
+        ssh-keygen -R $publicIp_R
+        scp -o "StrictHostKeyChecking=no"  -i $key ./configs/$name_R/extra-hosts-reducer.yaml ./configs/$name_R/settings-reducer.yaml ubuntu@${publicIp_R}\:/home/ubuntu/fedn/config
 
 
         
@@ -85,7 +88,8 @@ while read -r name_R publicIp_R privateIp_R; do
 
                     echo "Move settings-combiner.yaml file to the combiner instance"
                     # -o "StrictHostKeyChecking=no" 
-                    scp -o StrictHostKeyChecking=no -i $key ./configs/$name_C/settings-combiner.yaml  ubuntu@${publicIp_C}\:/home/ubuntu/fedn/config
+                    ssh-keygen -R $publicIp_C
+                    scp -o "StrictHostKeyChecking=no"  -i $key ./configs/$name_C/settings-combiner.yaml  ubuntu@${publicIp_C}\:/home/ubuntu/fedn/config
                 fi
             done <hosts_Ips.txt
 
@@ -105,7 +109,7 @@ while read -r name_R publicIp_R privateIp_R; do
                         printf "    discover_host: $privateIp_R\n"; shift
                         printf "    discover_port: 8090\n"; shift
                         printf "    token: token \n \n"; shift
-                    } >./configs/$name_Client/settings-client.yaml
+                    } >./configs/$name_Client/fedn-network.yaml
 
 
 
@@ -127,9 +131,11 @@ while read -r name_R publicIp_R privateIp_R; do
 
 
 
-                    echo "Move settings-client.yaml file to the client instance"
+                    echo "Move fedn-network.yaml file to the client instance"
                     # -o "StrictHostKeyChecking=no"
-                    scp -o StrictHostKeyChecking=no  -i $key ./configs/$name_Client/settings-client.yaml ./configs/$name_Client/extra-hosts-client.yaml ubuntu@${publicIp_Client}\:/home/ubuntu/fedn/config
+                    ssh-keygen -R $publicIp_Client
+                    scp -o "StrictHostKeyChecking=no"  -i $key ./configs/$name_Client/fedn-network.yaml ./configs/$name_Client/extra-hosts-client.yaml ubuntu@${publicIp_Client}\:/home/ubuntu/fedn/
+                    
                 fi
             done <hosts_Ips.txt
 
